@@ -1,3 +1,11 @@
 .headerStyle{
     padding-top: 10px;
+    height: 10vh;
+    margin-bottom: 5%;
+}
+
+.logoStyle{
+    width: 150px;
+    float: left;
+    margin: 0 25px;
 }

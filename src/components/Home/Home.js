@@ -1,4 +1,3 @@
-import { Container } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import RideOptions from '../RideOptions/RideOptions';
 import vehicle from '../../MOCK_DATA.json'

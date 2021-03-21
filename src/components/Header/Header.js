@@ -1,8 +1,10 @@
 import { Button } from '@material-ui/core';
+import { Image } from '@material-ui/icons';
 import React, { useContext } from 'react';
 import { Container, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
+import logo from '../../images/logo.png'
 import './Header.css';
 
 const Header = () => {
@@ -10,6 +12,7 @@ const Header = () => {
 
     return (
         < div className="headerStyle">
+            <Link to="/"><img src={logo} className="logoStyle" alt="logo" fluid/></Link>
             <Container>
                 <Nav className="justify-content-end" activeKey="/home">
                     <Nav.Item>
