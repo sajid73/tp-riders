@@ -1,0 +1,10 @@
+img {
+    width: 95%;
+}
+
+.containerStyle{
+    margin-top: 800px;
+    height: 40px;
+    background: lightcoral;
+    margin-top: 50vh;
+}

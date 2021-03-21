@@ -1,0 +1,17 @@
+.box-style{
+    display: flex;
+    float: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 1%;
+    height: 200px;
+    width: 180px;
+    background-color: bisque;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+img {
+    width: 95%;
+    border-radius: 5px;
+}
