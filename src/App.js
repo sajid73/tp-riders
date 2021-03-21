@@ -23,6 +23,7 @@ function App() {
     email: '',
     photoURL: '',
     password: '',
+    confirmPassword: '',
     error: ''
   });
   return (

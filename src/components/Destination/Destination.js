@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import vehicle from '../../MOCK_DATA.json';
 import './Destination.css'
@@ -18,7 +18,8 @@ const Destination = () => {
 
     const [place, setPlace] = useState({
         from: '',
-        to: ''
+        to: '',
+        dateTime: ''
     })
 
     const handleChange = (e) => {
@@ -44,6 +45,7 @@ const Destination = () => {
                                 <Input onBlur={handleChange} name="from" type='text' placeholder="Pickup" required></Input><br />
                                 <label>To</label><br></br>
                                 <Input onBlur={handleChange} name="to" type='text' placeholder="Destination" required></Input><br></br><br></br>
+                                <Input onBlur={handleChange} type="date" name="dateTime" required/><br/><br/>
                                 <input type='submit'></input>
                             </form>
                         </div>
@@ -52,6 +54,7 @@ const Destination = () => {
                         submited &&
                         <div className="fareTable ml-5">
                             <p> <b>{place.from}</b> To <b>{place.to}</b></p>
+                            on {place.dateTime}
                             <div className="rideStyle">
                                 <img className="rideIcon" src={vehicleDetails?.icon} alt="rideIcon" />
                                 <div className="passengerNumber">{vehicleDetails?.vehicle_name}</div>

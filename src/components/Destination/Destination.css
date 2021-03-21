@@ -1,5 +1,5 @@
 .input-fields{
-    height: 200px;
+    height: 300px;
     width: 300px;
     background: rgba(250, 128, 114, 0.9);
     border-radius: 10px;
@@ -9,7 +9,7 @@
     width: 90%;
 }
 .fareTable{
-    height: 300px;
+    height: 350px;
     width: 300px;
     background: rgba(19, 228, 183, 0.682);
     border-radius: 1rem;
@@ -18,7 +18,7 @@
 }
 .rideStyle{
     width: 94%;
-    height: 25%;
+    height: 22%;
     background-color: rgba(255, 255, 255, 0.741);
     margin: 5px auto;
     align-items: center;

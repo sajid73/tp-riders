@@ -8,7 +8,7 @@ const RideOptions = (props) => {
     const vehicleDetails = (vehicle) => {
         history.push(`/destination/${vehicle}`)
     }
-    const {vehicle_name, passenger, images, icons} = props.vehicle;
+    const {vehicle_name, images} = props.vehicle;
     return (
         <div className="box-style">
             <img src={images} alt={vehicle_name}/>

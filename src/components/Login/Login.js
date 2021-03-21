@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
 import { Button, Form } from "react-bootstrap";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -33,39 +32,17 @@ export default function Login() {
       newuser[e.target.name] = e.target.value;
       setLoggedInUser(newuser);
     }
-    if(!validForm){
+    if (!validForm) {
 
     }
   }
 
   const emailSignIn = (e) => {
-    if (newUser && loggedInUser.email && loggedInUser.password) {
-      firebase.auth().createUserWithEmailAndPassword(loggedInUser.email, loggedInUser.password)
-        .then((userCredential) => {
-          // Signed in 
-          const user = userCredential.user;
-          const newuser = { ...loggedInUser };
-          newuser.error = '';
-          newuser.isSignedin = true;
-          newuser.username = user.displayName;
-          setLoggedInUser(newuser);
-          // ...
-          userNameUpdate(loggedInUser.username);
-        })
-        .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          const newuser = { ...loggedInUser };
-          newuser.error = errorMessage;
-          setLoggedInUser(newuser);
-          // ..
-        });
-    }
     if (!newUser && loggedInUser.email && loggedInUser.password) {
       firebase.auth().signInWithEmailAndPassword(loggedInUser.email, loggedInUser.password)
         .then((userCredential) => {
           // Signed in
-          var user = userCredential.user;
+          const user = userCredential.user;
           const newuser = { ...loggedInUser };
           newuser.error = '';
           newuser.isSignedin = true;
@@ -75,12 +52,36 @@ export default function Login() {
           history.replace(from);
         })
         .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
+          const errorMessage = error.message;
           const newuser = { ...loggedInUser };
           newuser.error = errorMessage;
           setLoggedInUser(newuser);
         });
+    }
+    if (newUser && loggedInUser.email && (loggedInUser.password === loggedInUser.confirmPassword)) {
+      firebase.auth().createUserWithEmailAndPassword(loggedInUser.email, loggedInUser.password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          const newuser = { ...loggedInUser };
+          newuser.error = '';
+          newuser.isSignedin = true;
+          setLoggedInUser(newuser);
+          // ...
+          userNameUpdate(loggedInUser.username);
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          const newuser = { ...loggedInUser };
+          newuser.error = errorMessage;
+          setLoggedInUser(newuser);
+          // ..
+        });
+    }
+    if((loggedInUser.password !== loggedInUser.confirmPassword) && loggedInUser.confirmPassword!==''){
+      const newuser = { ...loggedInUser };
+          newuser.error = "Password did not matched";
+          setLoggedInUser(newuser);
     }
     e.preventDefault();
   }
@@ -113,14 +114,7 @@ export default function Login() {
         setLoggedInUser(newuser);
         history.replace(from);
       }).catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
+
       });
   }
 
@@ -131,7 +125,7 @@ export default function Login() {
         {
           newUser && <Form.Group controlId="formBasicUserName">
             <Form.Label>Username</Form.Label><br></br>
-            <Input onBlur={handleChange} type="text" name="username" placeholder="Enter your username" />
+            <Input onBlur={handleChange} type="text" name="username" placeholder="Enter your username" required />
           </Form.Group>
         }
         <Form.Group controlId="formBasicEmail">
@@ -143,9 +137,15 @@ export default function Login() {
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label><br></br>
+          <Form.Label>Password :</Form.Label>
           <Input onBlur={handleChange} type="password" name="password" placeholder="Enter your password" required />
         </Form.Group>
+        {
+          newUser && <Form.Group controlId="confirmPassword">
+            <Form.Label>Confirm Password :</Form.Label>
+            <Input onBlur={handleChange} type="password" name="confirmPassword" placeholder="Confirm password" required />
+          </Form.Group>
+        }
         <p style={{ color: 'tomato' }}><b>{loggedInUser.error}</b></p>
         <Form.Group controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="New user?" onChange={() => { setnewUser(!newUser); loggedInUser.error = '' }} />
