@@ -78,10 +78,10 @@ export default function Login() {
           // ..
         });
     }
-    if((loggedInUser.password !== loggedInUser.confirmPassword) && loggedInUser.confirmPassword!==''){
+    if ((loggedInUser.password !== loggedInUser.confirmPassword) && loggedInUser.confirmPassword !== '') {
       const newuser = { ...loggedInUser };
-          newuser.error = "Password did not matched";
-          setLoggedInUser(newuser);
+      newuser.error = "Password did not matched";
+      setLoggedInUser(newuser);
     }
     e.preventDefault();
   }
@@ -139,6 +139,9 @@ export default function Login() {
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password :</Form.Label>
           <Input onBlur={handleChange} type="password" name="password" placeholder="Enter your password" required />
+          <Form.Text className="text-muted">
+            your password must be 8 digit or more
+      </Form.Text>
         </Form.Group>
         {
           newUser && <Form.Group controlId="confirmPassword">
